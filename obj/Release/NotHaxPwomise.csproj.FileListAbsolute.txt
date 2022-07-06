@@ -1,0 +1,4 @@
+E:\GAMES\Undisputables\NotHaxPwomise\Package\plugins\NotHaxPwomise\NotHaxPwomise.dll
+E:\GAMES\Undisputables\NotHaxPwomise\obj\Release\NotHaxPwomise.csproj.CoreCompileInputs.cache
+E:\GAMES\Undisputables\NotHaxPwomise\obj\Release\NotHaxPwomise.dll
+E:\GAMES\Undisputables\NotHaxPwomise\obj\Release\NotHaxPwomise.csproj.AssemblyReference.cache
