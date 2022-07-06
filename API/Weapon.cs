@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 // I THINK WE DONE!!!!!!!!!
-namespace NotHaxPwomise.API
+namespace Undisputables.API
 {
     public class Weapon
     {

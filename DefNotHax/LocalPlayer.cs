@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using NotHaxPwomise.API;
-namespace NotHaxPwomise.DefNotHax
+using Undisputables.API;
+namespace Undisputables.DefNotHax
 {
     public class LocalPlayer
     {

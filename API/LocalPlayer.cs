@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using MultiplayerShooterKit;
-namespace NotHaxPwomise.API
+namespace Undisputables.API
 {
     public class LocalPlayer : MonoBehaviour
     {

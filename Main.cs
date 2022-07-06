@@ -1,12 +1,12 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
-using NotHaxPwomise.DefNotHax;
+using Undisputables.DefNotHax;
 using System.IO;
 using System.Reflection;
 using UnityEngine.SceneManagement;
 
-namespace NotHaxPwomise
+namespace Undisputables
 {
     [BepInPlugin(GUID, MODNAME, VERSION)]
     public class Main : BaseUnityPlugin
@@ -14,7 +14,7 @@ namespace NotHaxPwomise
         #region[Declarations]
 
         public const string
-            MODNAME = "NotHaxPwomise",
+            MODNAME = "Undisputables",
             AUTHOR = "",
             GUID = AUTHOR + "_" + MODNAME,
             VERSION = "1.0.0.0";

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-namespace NotHaxPwomise.API
+namespace Undisputables.API
 {
     public class NetworkManager : MonoBehaviour
     {
