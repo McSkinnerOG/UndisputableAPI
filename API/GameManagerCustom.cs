@@ -70,6 +70,11 @@ namespace Undisputables.API
 
         public void SetTeamNames(string team1, string team2) { Teams[0].name = team1; Teams[1].name = team2; }
         public void SetTeamColors(Color team1, Color team2) { Teams[0].color = team1; Teams[1].color = team2; }
+
+
+
+
+        
         public static void Update()
         {
 

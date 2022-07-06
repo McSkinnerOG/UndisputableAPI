@@ -14,7 +14,7 @@ namespace Undisputables.DefNotHax
             {
                 API.NetworkManager.NMC.maxPlayers = 64; 
                 API.NetworkManager.NMC.findingMatchTime = 10;
-                API.NetworkManager.NMC.waitingForPlayersTime = 20;
+                API.NetworkManager.NMC.waitingForPlayersTime = 20;  
             }
         }
     }

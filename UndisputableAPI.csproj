@@ -8,7 +8,7 @@
     <ProjectGuid>{E75EA085-DC04-4145-B342-C69AD4D36C77}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UndisputableAPI</RootNamespace>
+    <RootNamespace>UndisputablesAPI</RootNamespace>
     <AssemblyName>UndisputableAPI</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -430,13 +430,25 @@
     <Compile Include="API\GameManagerCustom.cs" />
     <Compile Include="API\LocalPlayer.cs" />
     <Compile Include="API\NetworkManager.cs" />
+    <Compile Include="API\NetworkPlayer.cs" />
     <Compile Include="API\Weapon.cs" />
     <Compile Include="API\World.cs" />
+    <Compile Include="DefNotHax\Aimbot.cs" />
     <Compile Include="DefNotHax\GameManagerCustom.cs" />
     <Compile Include="DefNotHax\LocalPlayer.cs" />
     <Compile Include="DefNotHax\NetworkManager.cs" />
     <Compile Include="DefNotHax\Weapon.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="NDraw\DrawConicSection.cs" />
+    <Compile Include="NDraw\DrawCore.cs" />
+    <Compile Include="NDraw\Drawer.cs" />
+    <Compile Include="NDraw\DrawGraph.cs" />
+    <Compile Include="NDraw\DrawLines.cs" />
+    <Compile Include="NDraw\DrawMesh.cs" />
+    <Compile Include="NDraw\DrawPie.cs" />
+    <Compile Include="NDraw\DrawShapes.cs" />
+    <Compile Include="NDraw\DrawSlider.cs" />
+    <Compile Include="NDraw\DrawSlidingGrid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Package\icon.png" />
     <None Include="GameDir.targets" />
