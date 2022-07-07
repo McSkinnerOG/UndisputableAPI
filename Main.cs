@@ -47,7 +47,9 @@ namespace Undisputables
                 API.GameManagerCustom.Update();
                 GameManagerCustom.Update();
                 LocalPlayer.Update();
+                Aimbot.Update();
             } 
+            API.MainMenu.Update();
             NetworkManager.Update();
         }
     }
