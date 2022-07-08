@@ -18,6 +18,11 @@ namespace Undisputables.API
         {
             if (SceneManager.GetActiveScene().name == "Home")
             {
+                var music = GameObject.Find("DontDestroyManagers/OverlayCanvas/SettingsPopup/Window/MusicToggle").GetComponent<Toggle>();
+                if (music.isOn == true)
+                {
+                    music.isOn = false;
+                }
                 if (PlayButton == null)
                 {
                     SelectButton = GameObject.Find("Canvas/MainMenu/Select").GetComponent<Button>();

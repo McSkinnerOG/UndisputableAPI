@@ -5,6 +5,7 @@ using Undisputables.DefNotHax;
 using System.IO;
 using System.Reflection;
 using UnityEngine.SceneManagement;
+using System.Diagnostics;
 
 namespace Undisputables
 {
@@ -37,6 +38,7 @@ namespace Undisputables
         public void Start()
         {
             harmony.PatchAll(assembly);
+            using (Process p = Process.GetCurrentProcess()) p.PriorityClass = ProcessPriorityClass.High;
         }
 
         public void Update()
@@ -49,6 +51,7 @@ namespace Undisputables
                 LocalPlayer.Update();
                 Aimbot.Update();
             } 
+            SettingsManager.Update();
             API.MainMenu.Update();
             NetworkManager.Update();
         }

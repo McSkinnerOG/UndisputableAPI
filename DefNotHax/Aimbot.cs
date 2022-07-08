@@ -39,17 +39,15 @@ namespace Undisputables.DefNotHax
                         }
                     }
                     AimTags = FindObjectsOfType<AIMBOTTAG>(); // Find all our AIMBOTTAGS  
-                    var dead = AimTags[TAG_ID].gameObject.GetComponent<PlayerBot>().isDead;
+                    var dead = AimTags[TAG_ID].IS_DEAD;
                     var trns = AimTags[TAG_ID].gameObject.transform.Find("AvatarPos").GetChild(0).GetChild(0).Find("Bip001 Pelvis").GetChild(2).GetChild(2).GetChild(0);
                     if (trns.name.ToLowerInvariant().Contains("head")) { HeadBone = trns; }
-                    if (dead == true)
-                    {
-                        TAG_ID++; if (TAG_ID > AimTags.Length - 1) { TAG_ID = 0; }
-                    }
+                    if (dead == true) { TAG_ID++; }
                     else if (dead != true)
                     {
                         cam1.transform.LookAt(HeadBone.position); // Make the Camera look at the selected target position we just made with the Vector3
                     }
+                    if (TAG_ID > AimTags.Length - 1) { TAG_ID = 0; }
                 }
             }
         }
