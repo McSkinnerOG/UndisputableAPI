@@ -13,56 +13,55 @@
 ///     WaitForEndOfFrame is cached.
 ///     
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace NDraw
 {
 
-    public class Drawer : MonoBehaviour
+  public class Drawer : MonoBehaviour
+  {
+    static Drawer e;
+
+    public Material material;
+    new Camera camera;
+
+    public static bool Exists { get { return e != null && e.enabled; } }
+
+    static readonly Vector2 one = Vector2.one;
+
+    private void Awake()
     {
-        static Drawer e;
+      e = this;
+    }
 
-        public Material material;
-        new Camera camera;
+    protected virtual void Start()
+    {
+      if (material == null)
+        CreateLineMaterial();
 
-        public static bool Exists { get { return e != null && e.enabled; } }
-
-        static readonly Vector2 one = Vector2.one;
-
-        private void Awake()
-        {
-            e = this;
-        }
-
-        protected virtual void Start()
-        {
-            if (material == null)
-                CreateLineMaterial();
-
-            camera = GetComponent<Camera>();
+      camera = GetComponent<Camera>();
 
 #if NDRAW_UPDATE_IN_COROUTINE
             StartCoroutine(PostRender());
 #endif
-        }
+    }
 
-        private void OnDestroy()
-        {
-            Draw.Clear();
-        }
+    private void OnDestroy()
+    {
+      Draw.Clear();
+    }
 
-        WaitForEndOfFrame wof = new WaitForEndOfFrame();
+    WaitForEndOfFrame wof = new WaitForEndOfFrame();
 
 #if !NDRAW_UPDATE_IN_COROUTINE
-        private void OnPostRender()
-        {
-            if (enabled)
-                Render();
+    private void OnPostRender()
+    {
+      if (enabled)
+        Render();
 
-            Draw.Clear();
-        }
+      Draw.Clear();
+    }
 #endif
 
 #if NDRAW_UPDATE_IN_COROUTINE
@@ -80,105 +79,105 @@ namespace NDraw
         }
 #endif
 
-        void CreateLineMaterial()
-        {
-            Shader shader = Shader.Find("Hidden/Internal-Colored");
-            material = new Material(shader);
-            //material.hideFlags = HideFlags.HideAndDontSave;
-            // Turn on alpha blending
-            material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-            material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-            // Turn backface culling off
-            material.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
-            // Turn off depth writes
-            material.SetInt("_ZWrite", 0);
+    void CreateLineMaterial()
+    {
+      Shader shader = Shader.Find("Hidden/Internal-Colored");
+      material = new Material(shader);
+      //material.hideFlags = HideFlags.HideAndDontSave;
+      // Turn on alpha blending
+      material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+      material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+      // Turn backface culling off
+      material.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+      // Turn off depth writes
+      material.SetInt("_ZWrite", 0);
 
-            // makes the material draw on top of everything
-            material.SetInt("_ZTest", 0);
-        }
+      // makes the material draw on top of everything
+      material.SetInt("_ZTest", 0);
+    }
 
-        protected void Render()
-        {
-            material.SetPass(0);
+    protected void Render()
+    {
+      material.SetPass(0);
 
-            //-------------
-            // WORLD SPACE
-            //-------------
+      //-------------
+      // WORLD SPACE
+      //-------------
 
-            GL.PushMatrix();
-            GL.LoadProjectionMatrix(camera.projectionMatrix);
-            GL.modelview = camera.worldToCameraMatrix;
+      GL.PushMatrix();
+      GL.LoadProjectionMatrix(camera.projectionMatrix);
+      GL.modelview = camera.worldToCameraMatrix;
 
-            GL.Begin(GL.LINES);
-            GL.Color(Color.white);
-            ProcessPoints(Draw.worldPoints, Draw.worldColorIndices, false);
-            GL.End();
+      GL.Begin(GL.LINES);
+      GL.Color(Color.white);
+      ProcessPoints(Draw.worldPoints, Draw.worldColorIndices, false);
+      GL.End();
 
-            GL.PopMatrix();
+      GL.PopMatrix();
 
-            //--------------
-            // SCREEN SPACE
-            //--------------
+      //--------------
+      // SCREEN SPACE
+      //--------------
 
-            GL.PushMatrix();
+      GL.PushMatrix();
 
 #if NDRAW_ORHTO_MULTIPLICATION
             GL.LoadOrtho();
 #else
-            GL.LoadPixelMatrix();
+      GL.LoadPixelMatrix();
 #endif
 
-            GL.Begin(GL.TRIANGLES);
-            ProcessPoints(Draw.screenTrisPoints, Draw.screenTrisColorIndices, true);
-            GL.End();
+      GL.Begin(GL.TRIANGLES);
+      ProcessPoints(Draw.screenTrisPoints, Draw.screenTrisColorIndices, true);
+      GL.End();
 
-            GL.Begin(GL.LINES);
-            ProcessPoints(Draw.screenPoints, Draw.screenColorIndices, true);
-            GL.End();
+      GL.Begin(GL.LINES);
+      ProcessPoints(Draw.screenPoints, Draw.screenColorIndices, true);
+      GL.End();
 
-            GL.PopMatrix();
+      GL.PopMatrix();
 
-        }
+    }
 
-        static void ProcessPoints(List<Vector3> points, List<Draw.ColorIndex> colorIndices, bool screen)
-        {
-            if (points.Count == 0) return;
+    static void ProcessPoints(List<Vector3> points, List<Draw.ColorIndex> colorIndices, bool screen)
+    {
+      if (points.Count == 0) return;
 
-            //GL.Color(Color.white);
+      //GL.Color(Color.white);
 #if NDRAW_ORHTO_MULTIPLICATION
             Vector2 s = screen ? new Vector2(1.0f / Screen.width, 1.0f / Screen.height) : one;
 #endif
 
-            bool hasColors = colorIndices.Count > 0;
+      bool hasColors = colorIndices.Count > 0;
 
-            int ci = 0;
-            int ct = points.Count;
-            for (int i = 0; i < ct; i++)
-            {
-                // handle color
-                if (hasColors && colorIndices[ci].i == i)
-                {
-                    GL.Color(colorIndices[ci].c);
+      int ci = 0;
+      int ct = points.Count;
+      for (int i = 0; i < ct; i++)
+      {
+        // handle color
+        if (hasColors && colorIndices[ci].i == i)
+        {
+          GL.Color(colorIndices[ci].c);
 
-                    ci++;
-                    if (ci >= colorIndices.Count) ci = 0;
-                }
+          ci++;
+          if (ci >= colorIndices.Count) ci = 0;
+        }
 
-                // push vertex
+        // push vertex
 #if NDRAW_ORHTO_MULTIPLICATION
                 if (screen)
                     GL.Vertex(points[i] * s);
                 else
                     GL.Vertex(points[i]);
 #else
-                GL.Vertex(points[i]);
+        GL.Vertex(points[i]);
 #endif
-            }
-        }
-
-        protected void ClearLines()
-        {
-            Draw.Clear();
-        }
+      }
     }
+
+    protected void ClearLines()
+    {
+      Draw.Clear();
+    }
+  }
 }
