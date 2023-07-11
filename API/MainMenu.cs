@@ -1,4 +1,5 @@
-﻿using MultiplayerShooterKit;
+﻿using HarmonyLib;
+using MultiplayerShooterKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,30 +13,17 @@ namespace Undisputables.API
 {
     public class MainMenu : MonoBehaviour
     {
-        public static Button SelectButton;
-        public static Button PlayButton; 
-        public static void Update() 
+        public static bool MusicBool = false;
+        [HarmonyPatch(typeof(UIMain), "HideSplashScreen")] 
+        public static class UIMain_Patch
         {
-            if (SceneManager.GetActiveScene().name == "Home")
+            static bool Prefix()
             {
-                var music = GameObject.Find("DontDestroyManagers/OverlayCanvas/SettingsPopup/Window/MusicToggle").GetComponent<Toggle>();
-                if (music.isOn == true)
-                {
-                    music.isOn = false;
-                }
-                if (PlayButton == null)
-                {
-                    SelectButton = GameObject.Find("Canvas/MainMenu/Select").GetComponent<Button>();
-                    PlayButton = GameObject.Find("Canvas/MainMenu/Play").GetComponent<Button>();
-                } 
-                else if (PlayButton != null && Input.GetKeyDown(KeyCode.Space))
-                {
-                    ItemsManager.instance.SetShowedAvatar();
-                    ItemsManager.instance.SetShowedItem();
-                    ItemsManager.instance.SetShowedWeapon(); 
-                    PlayButton.onClick.Invoke();
-                }
-            } 
-        }
+                AudioManager.GetInstance().musicSource.enabled = false; 
+                GameObject.Find("Canvas/SplashScreen").SetActive(false); 
+                InputManager.GetInstance().lockCursor = false;
+                return false;
+            }
+        } 
     }
 }

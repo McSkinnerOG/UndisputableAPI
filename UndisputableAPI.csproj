@@ -470,6 +470,7 @@ cmd /c start steam://run/1000500</PostBuildEvent>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="API\NewFolder1\" />
     <Folder Include="Package\plugins\NotHaxPwomise\" />
   </ItemGroup>
 </Project>

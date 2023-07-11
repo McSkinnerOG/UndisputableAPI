@@ -13,10 +13,14 @@ namespace Undisputables.DefNotHax
 {
     public class SettingsManager : MonoBehaviour
     { 
-        public static bool musicfix = true;
+        public static bool musicfix = false;
         public static Button SelectButton;
         public static Button PlayButton;
         public static UIMain UIMain; 
+
+
+
+
         public static void PlayButtonListenerAdd()
         {
             if (ItemsManager.instance.GetShowedWeaponItem().unlocked == true) { ItemsManager.instance.SetShowedWeapon(); Debug.LogError("WEAPON DONE"); }
